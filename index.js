@@ -40,6 +40,7 @@
 		await Run("git push", repoPath);
 	};
 	
+	
 	const Run = async(cmd="", cwd=ATA.CWD)=>{
 		const child = cp.spawn("bash", ["-c", cmd], {
 			cwd,
