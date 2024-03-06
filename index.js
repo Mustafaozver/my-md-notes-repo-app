@@ -212,6 +212,9 @@
 	
 	
 	const Setup = ()=>{
+		Run("git status").then(((resp)=>{
+			console.log(" === => " + resp + " <= === ");
+		}));
 		Run("sh backup.sh").then(((resp)=>{
 			console.log(" === => " + resp + " <= === ");
 		}));
