@@ -1,0 +1,23 @@
+{
+  "name": "my-md-notes-repo-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mustafaozver/my-md-notes-repo-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mustafaozver/my-md-notes-repo-app/issues"
+  },
+  "homepage": "https://github.com/Mustafaozver/my-md-notes-repo-app#readme",
+  "dependencies": {
+    "ata.js": "^8.0.12",
+    "simple-git": "^3.22.0"
+  }
+}
