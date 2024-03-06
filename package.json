@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/Mustafaozver/my-md-notes-repo-app#readme",
   "dependencies": {
-    "ata.js": "^8.0.12",
-    "simple-git": "^3.22.0"
+    "ata.js": "^8.0.12"
   }
 }
