@@ -1,8 +1,8 @@
 ((ATA)=>{
-	const wt = ATA.Require("node:child_process");
+	const cp = require("node:child_process");
 	const SGit = ATA.Require("simple-git");
 	
-	const config = ATA.Require("./config/config.js");
+	const config = require("./Config/0.json");
 	
 	const repoName = config.repoName;
 	const branchName = config.branchName;
@@ -25,16 +25,6 @@
 		let git = null;
 		let worker = null;
 		
-		
-		const MakeFolder = ()=>{
-			if(!ATA.FS.existsSync(repoPath)){
-				ATA.FS.mkdirSync(repoPath, {
-					recursive: true,
-				});
-				console.log("Create Folder => ", folderName, " ", repoPath);
-			}
-			console.log("Folder is exist. OK");
-		};
 		const GetLogs = async()=>{
 			return await git.log();
 		};
@@ -180,11 +170,56 @@
 		Init();
 	};
 	
+	
+	const MakeFolder = ()=>{
+		if(!ATA.FS.existsSync(repoPath)){
+			ATA.FS.mkdirSync(repoPath, {
+				recursive: true,
+			});
+			console.log("Create Folder => ", folderName, " ", repoPath);
+		}
+		console.log("Folder is exist. OK");
+	};
+	
+	const BackUp = async()=>{
+		
+		
+	};
+	
+	const Run = async(cmd="", cwd=ATA.CWD)=>{
+		const child = cp.spawn("bash", ["-c", cmd], {
+			cwd,
+		});
+		const promise = new Promise((resolve, reject)=>{
+			let chunk = "";
+			let fail = false;
+			child.stdout.once("data", (data)=>{
+				chunk += data.toString();
+			});
+			child.stderr.once("data", (data)=>{
+				chunk += "\n\n\n" + data.toString();
+				fail = true;
+			});
+			child.addListener("exit", (code)=>{
+				console.log("EXIT CODE => ", code);
+				if(fail)return reject(chunk);
+				else return resolve(chunk);
+			});
+		});
+		return await promise;
+	};
+	
+	
+	
 	const Setup = ()=>{
+		Run("sh backup.sh").then(((resp)=>{
+			console.log(" === => " + resp + " <= === ");
+		}));
 		
 	};
 	
 	ATA.Setups.push(()=>{
+		
 		Setup();
 	});
 })(require("ata.js")());
